@@ -114,8 +114,3 @@ Configure the application properties (`application.properties` or `application.y
 
 Feel free to contribute to the development of this project. You can open issues, submit pull requests, or provide feedback.
 
-
-
-```
-
-Make sure to replace placeholders such as `your-username` and customize sections like "Contributing" and "License" based on your project requirements and preferences.
