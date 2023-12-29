@@ -75,7 +75,14 @@ The project follows a standard Spring Boot project structure. Here are some key 
 - MongoDB installed and running
 - Twilio account for SMS functionality (optional)
 - SMTP server for email functionality (optional)
+### Dataset Setup
+1.Visit this link and downlaod kaggle dataset which is in .csv format from the repository [here](https://github.com/moxhadeel571/TableBookingSpringBoot/blob/main/archive.zip)
+2.Follow th video to import this .csv to MongoDB
+```bash
 
+https://github.com/moxhadeel571/Customer_care-registry_SpringBoot/assets/60618158/87ce6b17-b702-4729-a8d0-ba515484f85f
+
+````
 ### Build and Run
 
 1. Clone the repository:
