@@ -114,9 +114,7 @@ Configure the application properties (`application.properties` or `application.y
 
 Feel free to contribute to the development of this project. You can open issues, submit pull requests, or provide feedback.
 
-## License
 
-This project is licensed under the [MIT License](LICENSE).
 
 ```
 
