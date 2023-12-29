@@ -1,6 +1,4 @@
-Certainly! Here's a sample README file for your table booking project. Please customize it further based on your project's specific details:
 
-```markdown
 # Table Booking System
 
 This is a table booking system developed using Spring Boot, MongoDB, Thymeleaf, and other technologies.
