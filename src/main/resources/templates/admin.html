@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Admin</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+	<link rel="stylesheet" href="/css/open-iconic-bootstrap.min.css">
+	<link rel="stylesheet" href="/css/animate.css">
+
+	<link rel="stylesheet" href="/css/owl.carousel.min.css">
+	<link rel="stylesheet" href="/css/owl.theme.default.min.css">
+	<link rel="stylesheet" href="/css/magnific-popup.css">
+
+	<link rel="stylesheet" href="/css/aos.css">
+
+	<link rel="stylesheet" href="/css/ionicons.min.css">
+
+	<link rel="stylesheet" href="/css/bootstrap-datepicker.css">
+	<link rel="stylesheet" href="/css/jquery.timepicker.css">
+
+	<script src="https://kit.fontawesome.com/d98b7a61d2.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="/css/flaticon.css">
+	<link rel="stylesheet" href="/css/icomoon.css">
+	<link rel="stylesheet" href="/css/style.css">
+</head>
+<style>
+    body {
+        background: linear-gradient(to right, #1a237e, #3949ab); /* Gradient background color */
+        color: #ffffff; /* Font color */
+    }
+
+    .nav-tabs .nav-link {
+        background-color: #2196F3; /* Background color for inactive tabs */
+        color: #ffffff; /* Font color for inactive tabs */
+    }
+.nav{
+	justify-content: center;
+}
+    .nav-tabs .nav-link.active {
+        background-color: #1565c0; /* Background color for active tab */
+        color: #ffffff; /* Font color for active tab */
+    }
+</style>
+<body>
+<div th:insert="Fragment/Header::header"></div>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+	<li class="nav-item" role="presentation">
+		<button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Bookings</button>
+	</li>
+	<li class="nav-item" role="presentation">
+		<button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Form</button>
+	</li>
+
+</ul>
+<div class="tab-content" id="myTabContent">
+	<div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0"><div class="container mt-5">
+		<h2>Booking Table</h2>
+		<hr>
+
+		<table class="table table-bordered" style="max-width: 500px">
+			<thead>
+			<tr>
+				<th>Booking ID</th>
+				<th>Number of Persons</th>
+				<th>Date</th>
+				<th>Time</th>
+				<th>Name</th>
+				<th>Email Address</th>
+				<th>Actions</th>
+			</tr>
+			</thead>
+			<tbody>
+			<!-- Iterate over the list of bookings and display each row -->
+			<tr th:each="booking : ${bookings}">
+				<td th:text="${booking.id}"></td>
+				<td th:text="${booking.numberPersons}"></td>
+				<td th:text="${booking.bookingDate}"></td>
+				<td th:text="${booking.bookingTime}"></td>
+				<td th:text="${booking.name}"></td>
+				<td th:text="${booking.emailAddress}"></td>
+				<td>
+					<!-- Add buttons for actions (e.g., approve, delay) -->
+					<form th:action="@{/Restaurant_/Approve_dwajvAWV/{id}(id=${booking.id})}" method="post" style="display: inline;">
+						<button type="submit" class="btn btn-success btn-sm">Approve</button>
+					</form>
+					<form th:action="@{/Restaurant_/Disapprove_dwajvAWV/{id}(id= ${booking.id})}" method="post" style="display: inline;">
+						<button type="submit" class="btn btn-warning btn-sm">Delay</button>
+					</form>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+	</div>
+	<div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+		<div class="container mt-5">
+			<form action="/SaveRestaurent" method="post" enctype="text/plain">
+
+				<!-- Restaurant ID -->
+				<div class="form-group">
+					<label for="res_id">Restaurant ID:</label>
+					<input type="text" class="form-control" id="res_id" name="res_id" required>
+				</div>
+
+				<!-- Name -->
+				<div class="form-group">
+					<label for="name">Name:</label>
+					<input type="text" class="form-control" id="name" name="name" required>
+				</div>
+
+				<!-- Establishment -->
+				<div class="form-group">
+					<label for="establishment">Establishment:</label>
+					<input type="text" class="form-control" id="establishment" name="establishment" required>
+				</div>
+
+				<!-- URL -->
+				<div class="form-group">
+					<label for="url">URL:</label>
+					<input type="text" class="form-control" id="url" name="url" required>
+				</div>
+
+				<!-- Address -->
+				<div class="form-group">
+					<label for="address">Address:</label>
+					<input type="text" class="form-control" id="address" name="address" required>
+				</div>
+
+				<!-- City -->
+				<div class="form-group">
+					<label for="city">City:</label>
+					<input type="text" class="form-control" id="city" name="city" required>
+				</div>
+
+				<!-- Latitude -->
+				<div class="form-group">
+					<label for="latitude">Latitude:</label>
+					<input type="text" class="form-control" id="latitude" name="latitude" required>
+				</div>
+
+				<!-- Longitude -->
+				<div class="form-group">
+					<label for="longitude">Longitude:</label>
+					<input type="text" class="form-control" id="longitude" name="longitude" required>
+				</div>
+
+				<!-- Zipcode -->
+				<div class="form-group">
+					<label for="zipcode">Zipcode:</label>
+					<input type="text" class="form-control" id="zipcode" name="zipcode" required>
+				</div>
+
+				<!-- Country ID -->
+				<div class="form-group">
+					<label for="country_id">Country ID:</label>
+					<input type="text" class="form-control" id="country_id" name="country_id" required>
+				</div>
+
+				<!-- Locality Verbose -->
+				<div class="form-group">
+					<label for="locality_verbose">Locality Verbose:</label>
+					<input type="text" class="form-control" id="locality_verbose" name="locality_verbose" required>
+				</div>
+
+				<!-- Cuisines -->
+				<div class="form-group">
+					<label for="cuisines">Cuisines:</label>
+					<input type="text" class="form-control" id="cuisines" name="cuisines" required>
+				</div>
+
+				<!-- Timings -->
+				<div class="form-group">
+					<label for="timings">Timings:</label>
+					<input type="text" class="form-control" id="timings" name="timings" required>
+				</div>
+
+				<!-- Average Cost for Two -->
+				<div class="form-group">
+					<label for="average_cost_for_two">Average Cost for Two:</label>
+					<input type="text" class="form-control" id="average_cost_for_two" name="average_cost_for_two" required>
+				</div>
+
+				<!-- Price Range -->
+				<div class="form-group">
+					<label for="price_range">Price Range:</label>
+					<input type="text" class="form-control" id="price_range" name="price_range" required>
+				</div>
+
+				<!-- Currency -->
+				<div class="form-group">
+					<label for="currency">Currency:</label>
+					<input type="text" class="form-control" id="currency" name="currency" required>
+				</div>
+
+				<!-- Highlights -->
+				<div class="form-group">
+					<label for="highlights">Highlights:</label>
+					<input type="text" class="form-control" id="highlights" name="highlights" required>
+				</div>
+
+				<!-- Aggregate Rating -->
+				<div class="form-group">
+					<label for="aggregate_rating">Aggregate Rating:</label>
+					<input type="text" class="form-control" id="aggregate_rating" name="aggregate_rating" required>
+				</div>
+
+				<!-- Rating Text -->
+				<div class="form-group">
+					<label for="rating_text">Rating Text:</label>
+					<input type="text" class="form-control" id="rating_text" name="rating_text" required>
+				</div>
+
+				<!-- Votes -->
+				<div class="form-group">
+					<label for="votes">Votes:</label>
+					<input type="text" class="form-control" id="votes" name="votes" required>
+				</div>
+
+				<!-- Photo Count -->
+				<div class="form-group">
+					<label for="photo_count">Photo Count:</label>
+					<input type="text" class="form-control" id="photo_count" name="photo_count" required>
+				</div>
+
+				<!-- Opentable Support -->
+				<div class="form-group">
+					<label for="opentable_support">Opentable Support:</label>
+					<input type="text" class="form-control" id="opentable_support" name="opentable_support" required>
+				</div>
+
+				<!-- Delivery -->
+				<div class="form-group">
+					<label for="delivery">Delivery:</label>
+					<input type="text" class="form-control" id="delivery" name="delivery" required>
+				</div>
+
+				<!-- Takeaway -->
+				<div class="form-group">
+					<label for="takeaway">Takeaway:</label>
+					<input type="text" class="form-control" id="takeaway" name="takeaway" required>
+				</div>
+
+
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+		</div>
+	</div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<footer th:insert="Fragment/Footer::footer"></footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="/js/jquery-3.4.1.min.js"></script>
+<!-- bootstrap js -->
+<script src="/js/bootstrap.js"></script>
+<!-- slick  slider -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"></script>
+<!-- nice select -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js" integrity="sha256-Zr3vByTlMGQhvMfgkQ5BtWRSKBGa2QlspKYJnkjZTmo=" crossorigin="anonymous"></script>
+<!-- custom js -->
+<script src="/js/custom.js"></script>
+
+
+
+<!-- loader -->
+
+
+
+</body>
+</html>

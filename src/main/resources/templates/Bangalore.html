@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Restaurant</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <!-- Google Fonts: Poppins -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+
+  <!-- Nice Select CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css">
+
+  <!-- Slick Slider CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css">
+
+  <!-- Custom Styles -->
+  <link href="/css/style.css" rel="stylesheet" />
+  <link href="/css/responsive.css" rel="stylesheet" />
+</head>
+<style>
+
+</style>
+<body>
+<div th:insert="Fragment/Header::header"></div>
+<div class="container">
+  <!-- Search Button -->
+  <div class="mb-3">
+    <label for="exampleFormControlTextarea1" class="form-label">Search..</label>
+    <input type="text" class="form-control form-control-lg" id="exampleFormControlTextarea1" data-toggle="modal" data-target="#searchModal" placeholder="Click here for search">
+  </div>
+  <div class="card mb-3"  th:each="hyd:${Bangalore}" style="max-width: 75%">
+    <img id="imgShow" class="card-img-top">
+    <div class="card-body">
+      <h5 class="card-title" th:text="${hyd.name}">Card title</h5>
+      <p class="card-text" th:text="${hyd.cuisines}"></p>
+      <p class="card-text" th:text="${hyd.timings}"></p>
+      <div class="footer">
+        <a class="btn btn-dark btn-bg" th:href="@{/Customer/ViewBangalore_fFSFAFiof/{id}(id=${hyd.id})}">View Details</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Search Modal -->
+<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Search Restaurant</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form th:action="@{/Search_RestaurantFAsfa}" method="post">
+          <div class="form-group">
+            <label for="searchInput">Enter your search query:</label>
+            <input type="text" class="form-control" name="name" id="searchInput" placeholder="Search...">
+          </div>
+          <button type="button" class="btn btn-primary">Search</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div th:insert="Fragment/Footer::footer"></div>
+
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+<!-- Bootstrap 5 JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+<!-- Slick Slider JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"></script>
+
+<!-- Nice Select JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js" integrity="sha256-Zr3vByTlMGQhvMfgkQ5BtWRSKBGa2QlspKYJnkjZTmo=" crossorigin="anonymous"></script>
+<script>
+  document.getElementById('imgShow').src = 'https://picsum.photos/'+(200+rand())+'/' + (300 + rand()) +'?random=1';}
+
+  function rand(){ return Math.floor(Math.random() * 90)} ;
+</script>
+<!-- Custom JS -->
+<script src="/js/custom.js"></script>
+</body>
+</html>

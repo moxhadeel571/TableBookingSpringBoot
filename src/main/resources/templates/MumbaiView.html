@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Restaurant View</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+	<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+	<script src="https://kit.fontawesome.com/d98b7a61d2.js" crossorigin="anonymous"></script>
+
+	<link rel="stylesheet" href="/css/style.css">
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .card-area {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin: 20px 0;
+    }
+
+    .img-box {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .card-header {
+        font-size: 1.5rem;
+        margin: 10px 0;
+    }
+
+    .text {
+        margin: 5px 0;
+    }
+
+    .icon {
+        margin-right: 5px;
+    }
+
+    .about-section {
+        border-top: 1px solid #ddd;
+        padding-top: 20px;
+        margin-top: 20px;
+    }
+    .custom-btn{
+        display: flex;
+        flex-direction: row;
+        align-items: end;
+    }
+</style>
+<body class="goto-here">
+
+<div th:insert="Fragment/Header::header"></div>
+<div class="container">
+	<h1><i class="fas fa-utensils"></i> Restaurant Details</h1>
+	<div class="card-area" th:each="data:${Mumbai}">
+
+		<img src="https://img.freepik.com/free-psd/food-menu-restaurant-web-banner-template_106176-825.jpg?w=996&t=st=1703584345~exp=1703584945~hmac=95fcc0ecbdc1a77104bbe6279626f6656f11adb57a5c362d87987b9c4fe50af2" class="img-box">
+		<div class="card-body">
+			<h1 class="card-header" th:text="${data.name}"></h1>
+			<h2 class="text text-sm-right">
+				<i class="fas fa-star"></i>
+				<span th:text="${data.rating_text}"></span>
+			</h2>
+			<h6 class="text text-sm-left">Cusines
+				<i class="fas fa-utensils"></i>
+				<span th:text="${data.cuisines}"></span>
+			</h6>
+			<h6 class="text text-sm-left">Address:
+				<i class="fas fa-map-marker-alt"></i>
+				<span th:text="${data.address}"></span>
+			</h6>
+			<h6 class="text text-sm-left">
+				<i class="fas fa-city"></i>
+				<span th:text="${data.locality_verbose}"></span>
+			</h6>
+			<h6 class="text text-sm-left text-success">Open Hours
+				<i class="far fa-clock"></i>
+				<span th:text="${data.timings}"></span>
+			</h6>
+
+
+
+
+
+
+
+
+
+
+
+			<!-- Button trigger modal -->
+			<button type="button" class="btn btn-lg btn-outline-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+				Book
+			</button>
+
+			<!-- Modal -->
+			<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h1 class="modal-title fs-5" id="staticBackdropLabel">Booking Form</h1>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="booking-form">
+								<form th:action="@{/Customer/SaveBooking_FGedtgeRTe/{id}(id=${id})}" th:object="${booking}"  method="post" >
+									<div class="form-group">
+										<label for="Name">Name:</label>
+										<input type="text" class="form-control" id="Name" name="Name"  th:text="*{name}" required>
+									</div>
+									<div class="form-group">
+										<label for="NumberPersons">Number of Persons:</label>
+										<input type="number" class="form-control" id="NumberPersons"  name="NumberPersons" th:text="*{numberPersons}" required>
+									</div>
+									<div class="form-group">
+										<label for="BookingDate">Date:</label>
+										<input type="date" class="form-control" id="BookingDate"  name="BookingDate" th:text="*{bookingDate}" required>
+									</div>
+									<div class="form-group">
+										<label for="BookingTime">Time:</label>
+										<input type="time" class="form-control" id="BookingTime" name="BookingTime " th:text="*{bookingTime}" required>
+									</div>
+									<div class="form-group">
+										<label for="EmailAddress">Email:</label>
+										<input type="email" class="form-control" id="EmailAddress" name="EmailAddress"  th:text="*{emailAddress}" required>
+									</div>
+									<!-- Add more form fields as needed -->
+
+									<button type="submit"  class="btn btn-outline-success btn-bg">
+										<i class="far fa-calendar-alt"></i> Book Now
+									</button>
+								</form>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+
+			<br>
+			<br>
+			<h2><i class="fas fa-info-circle"></i> About this place</h2>
+			<h6 class="text text-sm-left" th:text="${data.highlights}"></h6>
+			<h6 class="text text-sm-left text-bold">
+				Average cost for Two
+				<i class="fas fa-dollar-sign icon"></i>
+				<span th:text="${data.average_cost_for_two}"></span>
+			</h6>
+			<h6 class="text text-sm-right">Price Range Per Person
+				<i class="fas fa-dollar-sign icon"></i>
+				<span th:text="${data.price_range}"></span>
+			</h6>
+			<h6 class="text text-sm-left">Rating
+				<i class="fas fa-star-half-alt"></i>
+				<span th:text="${data.aggregate_rating}"></span>
+			</h6>
+			<h6 class="text text-sm-left">Photo Taken
+				<i class="fas fa-camera"></i>
+				<span th:text="${data.photo_count}"></span>
+			</h6>
+			<h6 class="text text-sm-left">Votes
+				<i class="fas fa-thumbs-up"></i>
+				<span th:text="${data.votes}"></span>
+			</h6>
+		</div>
+
+	</div>
+</div>
+
+<br>
+<br>
+<br>
+
+
+<footer th:insert="Fragment/Footer::footer"></footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="/js/jquery-3.4.1.min.js"></script>
+<!-- bootstrap js -->
+<script src="/js/bootstrap.js"></script>
+<!-- slick  slider -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"></script>
+<!-- nice select -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js" integrity="sha256-Zr3vByTlMGQhvMfgkQ5BtWRSKBGa2QlspKYJnkjZTmo=" crossorigin="anonymous"></script>
+<!-- custom js -->
+<script src="/js/custom.js"></script>
+
+
+
+<!-- loader -->
+
+
+
+</body>
+</html>

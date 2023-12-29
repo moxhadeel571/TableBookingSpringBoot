@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+<div class="card " th:each="info:${list}" style="width: 18rem;">
+	<img src="..." class="card-img-top" alt="...">
+	<div class="card-body">
+		<h5 class="card-title" th:text="${info.name}"></h5>
+		<p class="card-text" th:text="${info.cuisines}"></p>
+		<a href="#" class="btn btn-primary" th:text="${info.timings}"></a>
+	</div>
+</div>
+</body>
+</html>

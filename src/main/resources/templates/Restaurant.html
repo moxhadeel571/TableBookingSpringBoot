@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Restaurent</title>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<!-- Mobile Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<!-- Site Metas -->
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+
+	<!-- bootstrap core css -->
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+
+	<!-- fonts style -->
+	<link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+	<!-- font awesome style -->
+	<link href="/css/font-awesome.min.css" rel="stylesheet" />
+	<!-- nice select -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha256-mLBIhmBvigTFWPSCtvdu6a76T+3Xyt+K571hupeFLg4=" crossorigin="anonymous" />
+	<!-- slidck slider -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" integrity="sha256-UK1EiopXIL+KVhfbFa8xrmAWPeBjMVdvYMYkTAEv/HI=" crossorigin="anonymous" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css.map" integrity="undefined" crossorigin="anonymous" />
+
+
+	<!-- Custom styles for this template -->
+	<link href="/css/style.css" rel="stylesheet" />
+	<!-- responsive style -->
+	<link href="/css/responsive.css" rel="stylesheet" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+<div th:insert="Fragment/Header::header"></div>
+<section class="slider_section ">
+	<div class="container ">
+		<div class="row">
+				<h1 class="text-dark" style="padding-bottom: 20px">
+					Discover Restuarant And Food
+				</h1>
+		</div>
+	</div>
+	<div class="slider_container">
+		<div class="item">
+			<div class="img-box">
+				<h3>Charminar</h3>
+				<a th:href="@{/Customer/Hyderabad_BIDKAkaa}">
+					<img src="https://in.bmscdn.com/m6/images/common-modules/regions/hyd.png" alt="" />
+
+				</a>
+			</div>
+
+		</div>
+		<div class="item">
+			<div class="img-box">
+				<a th:href="@{/Customer/Delhi_NCRjsausasa}">
+					<img src="https://in.bmscdn.com/m6/images/common-modules/regions/ncr.png" alt="" />
+
+				</a>
+				<h3>Delhi-NCR</h3>
+
+			</div>
+		</div>
+		<div class="item">
+			<div class="img-box">
+				<a href="/Customer/Bangalore_jsausasa">
+					<img src="https://in.bmscdn.com/m6/images/common-modules/regions/bang.png" alt="" />
+
+				</a>
+				<h3>Bangalore</h3>
+
+			</div>
+		</div>
+		<div class="item">
+			<div class="img-box">
+				<h3>Mumbai</h3>
+				<a href="/Customer/Mumbai_jsausasa">
+					<img src="https://in.bmscdn.com/m6/images/common-modules/regions/mumbai.png" alt="" />
+
+				</a>
+			</div>
+		</div>
+
+	</div>
+</section>
+
+
+
+
+
+
+
+
+
+<div th:insert="Fragment/Footer::footer"></div>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+<script>
+    $(document).ready(function () {
+        const apiKey = 'cb0616bc68msh6e3deaac8b7224ep1bb30ejsn9e351419cb02';
+
+        $('#searchInput').on('input', function () {
+            const searchTerm = $(this).val();
+
+            if (searchTerm.length >= 3) { // Adjust the minimum length as needed
+                const settings = {
+                    async: true,
+                    crossDomain: true,
+                    url: 'https://worldwide-restaurants.p.rapidapi.com/search',
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/x-www-form-urlencoded',
+                        'X-RapidAPI-Key': apiKey,
+                        'X-RapidAPI-Host': 'worldwide-restaurants.p.rapidapi.com'
+                    },
+                    data: {
+                        language: 'en_US',
+                        currency: 'USD',
+                        offset: '0',
+                        q: searchTerm
+                    }
+                };
+
+                $.ajax(settings).done(function (response) {
+                    displaySuggestions(response.result.data);
+                });
+            } else {
+                // Clear suggestions if search term is too short
+                $('#suggestionsList').empty();
+            }
+        });
+
+        function displaySuggestions(suggestions) {
+            const suggestionsList = $('#suggestionsList');
+            suggestionsList.empty();
+
+            if (suggestions.length === 0) {
+                suggestionsList.append('<li class="list-group-item">No suggestions found</li>');
+            } else {
+                suggestions.forEach(function (item) {
+                    suggestionsList.append('<li class="list-group-item">' + item.name + '</li>');
+                });
+            }
+        }
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="/js/jquery-3.4.1.min.js"></script>
+<!-- bootstrap js -->
+<script src="/js/bootstrap.js"></script>
+<!-- slick  slider -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"></script>
+<!-- nice select -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js" integrity="sha256-Zr3vByTlMGQhvMfgkQ5BtWRSKBGa2QlspKYJnkjZTmo=" crossorigin="anonymous"></script>
+<!-- custom js -->
+<script src="/js/custom.js"></script>
+</body>
+</html>

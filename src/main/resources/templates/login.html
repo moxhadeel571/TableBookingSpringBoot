@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="Free HTML Templates" name="keywords">
+  <meta content="Free HTML Templates" name="description">
+  <link href="img/favicon.ico" rel="icon">
+
+  <!-- Google Web Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+  <!-- Libraries Stylesheet -->
+  <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+  <!-- Customized Bootstrap Stylesheet -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+  <!-- Your Additional CSS Files -->
+
+  <!-- JavaScript -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Bootstrap CSS -->
+  <style>
+    section {
+      background-image: url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/e88dcfee-a1b5-47b4-929c-f8c9ee343607/detxrtr-2ddc5e0a-ba6b-4be0-859a-c0f6ee6fbecd.png/v1/fill/w_1280,h_574/ubering_at_night_in_tokyo_by_lukimani_detxrtr-fullview.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NTc0IiwicGF0aCI6IlwvZlwvZTg4ZGNmZWUtYTFiNS00N2I0LTkyOWMtZjhjOWVlMzQzNjA3XC9kZXR4cnRyLTJkZGM1ZTBhLWJhNmItNGJlMC04NTlhLWMwZjZlZTZmYmVjZC5wbmciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.51Bnh_Pn63KnkNzr0bz2GnYJpiaGDHVSZn4lsx0AomU");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      padding: 50px 0;
+    }
+    .card-header {
+      background-color: purple; /* Changed to purple */
+      color: #fff;
+      padding: 15px 0;
+      border-bottom: none;
+    }
+    .card-body {
+      background-color: black; /* Changed to black */
+      color: #333;
+    }
+    .form-label {
+      font-weight: bold;
+    }
+    .form-control {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      margin-bottom: 15px;
+    }
+    .form-control:focus {
+      outline: none;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    }
+    .invalid-feedback {
+      color: #dc3545;
+    }
+    .btn-primary {
+      background-color: #3FDFA2;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      color: #fff;
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      background-color: lightslategrey;
+    }
+    .footer {
+      background-color: white;
+      padding: 30px 0;
+    }
+    .footer p {
+      margin-bottom: 0;
+    }
+    .form_container {
+      width: fit-content;
+      height: fit-content;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      padding: 50px 40px 20px 40px;
+      background-color: #ffffff;
+      box-shadow: 0px 106px 42px rgba(0, 0, 0, 0.01),
+      0px 59px 36px rgba(0, 0, 0, 0.05), 0px 26px 26px rgba(0, 0, 0, 0.09),
+      0px 7px 15px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
+      border-radius: 11px;
+      font-family: "Inter", sans-serif;
+    }
+
+    .logo_container {
+      box-sizing: border-box;
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(180deg, rgba(248, 248, 248, 0) 50%, #F8F8F888 100%);
+      border: 1px solid #F7F7F8;
+      filter: drop-shadow(0px 0.5px 0.5px #EFEFEF) drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
+      border-radius: 11px;
+    }
+
+    .title_container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .title {
+      margin: 0;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #212121;
+    }
+
+    .subtitle {
+      font-size: 0.725rem;
+      max-width: 80%;
+      text-align: center;
+      line-height: 1.1rem;
+      color: #8B8E98
+    }
+
+    .input_container {
+      width: 100%;
+      height: fit-content;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .icon {
+      width: 20px;
+      position: absolute;
+      z-index: 99;
+      left: 12px;
+      bottom: 9px;
+    }
+
+    .input_label {
+      font-size: 0.75rem;
+      color: #8B8E98;
+      font-weight: 600;
+    }
+
+    .input_field {
+      width: auto;
+      height: 40px;
+      padding: 0 0 0 40px;
+      border-radius: 7px;
+      outline: none;
+      border: 1px solid #e5e5e5;
+      filter: drop-shadow(0px 1px 0px #efefef)
+      drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
+      transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
+    }
+    .footer {
+      background-color: #212121;
+      color: #ffffff;
+      padding: 30px 0;
+    }
+
+    .input_field:focus {
+      border: 1px solid transparent;
+      box-shadow: 0px 0px 0px 2px #242424;
+      background-color: transparent;
+    }
+
+    .sign-in_btn {
+      width: 100%;
+      height: 40px;
+      border: 0;
+      background: #115DFC;
+      border-radius: 7px;
+      outline: none;
+      color: #ffffff;
+      cursor: pointer;
+    }
+
+    .sign-in_ggl {
+      width: 100%;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: #ffffff;
+      border-radius: 7px;
+      outline: none;
+      color: #242424;
+      border: 1px solid #e5e5e5;
+      filter: drop-shadow(0px 1px 0px #efefef)
+      drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
+      cursor: pointer;
+    }
+
+    .sign-in_apl {
+      width: 100%;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: #212121;
+      border-radius: 7px;
+      outline: none;
+      color: #ffffff;
+      border: 1px solid #e5e5e5;
+      filter: drop-shadow(0px 1px 0px #efefef)
+      drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
+      cursor: pointer;
+    }
+
+    .separator {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      color: #8B8E98;
+    }
+
+    .separator .line {
+      display: block;
+      width: 100%;
+      height: 1px;
+      border: 0;
+      background-color: #e8e8e8;
+    }
+
+    .note {
+      font-size: 0.75rem;
+      color: #8B8E98;
+      text-decoration: underline;
+    }
+    .container {
+      display: flex;
+      justify-content: start;
+      align-items: start;
+      min-height: 100vh; /* Ensure the form is vertically centered */
+    }
+    .logo_container {
+      box-sizing: border-box;
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(180deg, rgba(248, 248, 248, 0) 50%, #F8F8F888 100%);
+      border: 1px solid #F7F7F8;
+      filter: drop-shadow(0px 0.5px 0.5px #EFEFEF) drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
+      border-radius: 11px;
+      display: flex;
+      justify-content: center;
+      align-items: center; /* Center the icon vertically */
+    }
+  </style>
+  <style>
+    .body{
+      background-image: url(/css/Images/3885190.jpg);
+      object-fit: contain;
+      max-height: 50%;
+      max-width: 100%;
+      justify-content: end;
+
+
+    }
+  </style>
+</head>
+<body class="body">
+<header>
+  <nav class="navbar navbar-expand-xl bg-success">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/home}">Home</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/signin}">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/register}">Registration</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#00cba9" fill-opacity="0.51" d="M0,128L120,117.3C240,107,480,85,720,90.7C960,96,1200,128,1320,144L1440,160L1440,0L1320,0C1200,0,960,0,720,0C480,0,240,0,120,0L0,0Z"></path></svg>
+  <br>
+<br>
+<div class="container mx-auto">
+<form class="form_container d-flex justify-content-start" action="userLogin"  method="post">
+  <div class="logo_container">
+    <i class="fas fa-smile"></i>
+  </div>
+  <div class="title_container">
+    <p class="title">Login to your Account</p>
+    <span class="subtitle">Get started with our app, just create an account and enjoy the experience.</span>
+  </div>
+  <th:block th:if="${param.error}">
+    <p class="text-center text-danger fs-5" style="color: #dc3545;">
+      [[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]
+    </p>
+  </th:block>
+  <div class="input_container">
+    <label class="input_label" for="username">Email</label>
+    <svg fill="none" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg" class="icon">
+      <path stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#141B34" d="M7 8.5L9.94202 10.2394C11.6572 11.2535 12.3428 11.2535 14.058 10.2394L17 8.5"></path>
+      <path stroke-linejoin="round" stroke-width="1.5" stroke="#141B34" d="M2.01577 13.4756C2.08114 16.5412 2.11383 18.0739 3.24496 19.2094C4.37608 20.3448 5.95033 20.3843 9.09883 20.4634C11.0393 20.5122 12.9607 20.5122 14.9012 20.4634C18.0497 20.3843 19.6239 20.3448 20.7551 19.2094C21.8862 18.0739 21.9189 16.5412 21.9842 13.4756C22.0053 12.4899 22.0053 11.5101 21.9842 10.5244C21.9189 7.45886 21.8862 5.92609 20.7551 4.79066C19.6239 3.65523 18.0497 3.61568 14.9012 3.53657C12.9607 3.48781 11.0393 3.48781 9.09882 3.53656C5.95033 3.61566 4.37608 3.65521 3.24495 4.79065C2.11382 5.92608 2.08114 7.45885 2.01576 10.5244C1.99474 11.5101 1.99475 12.4899 2.01577 13.4756Z"></path>
+    </svg>
+    <input placeholder="name@mail.com" title="Inpit title" name="username" type="text" class="input_field" id="username">
+  </div>
+  <div class="input_container">
+    <label class="input_label" for="password">Password</label>
+    <svg fill="none" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg" class="icon">
+      <path stroke-linecap="round" stroke-width="1.5" stroke="#141B34" d="M18 11.0041C17.4166 9.91704 16.273 9.15775 14.9519 9.0993C13.477 9.03404 11.9788 9 10.329 9C8.67911 9 7.18091 9.03404 5.70604 9.0993C3.95328 9.17685 2.51295 10.4881 2.27882 12.1618C2.12602 13.2541 2 14.3734 2 15.5134C2 16.6534 2.12602 17.7727 2.27882 18.865C2.51295 20.5387 3.95328 21.8499 5.70604 21.9275C6.42013 21.9591 7.26041 21.9834 8 22"></path>
+      <path stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#141B34" d="M6 9V6.5C6 4.01472 8.01472 2 10.5 2C12.9853 2 15 4.01472 15 6.5V9"></path>
+      <path fill="#141B34" d="M21.2046 15.1045L20.6242 15.6956V15.6956L21.2046 15.1045ZM21.4196 16.4767C21.7461 16.7972 22.2706 16.7924 22.5911 16.466C22.9116 16.1395 22.9068 15.615 22.5804 15.2945L21.4196 16.4767ZM18.0228 15.1045L17.4424 14.5134V14.5134L18.0228 15.1045ZM18.2379 18.0387C18.5643 18.3593 19.0888 18.3545 19.4094 18.028C19.7299 17.7016 19.7251 17.1771 19.3987 16.8565L18.2379 18.0387ZM14.2603 20.7619C13.7039 21.3082 12.7957 21.3082 12.2394 20.7619L11.0786 21.9441C12.2794 23.1232 14.2202 23.1232 15.4211 21.9441L14.2603 20.7619ZM12.2394 20.7619C11.6914 20.2239 11.6914 19.358 12.2394 18.82L11.0786 17.6378C9.86927 18.8252 9.86927 20.7567 11.0786 21.9441L12.2394 20.7619ZM12.2394 18.82C12.7957 18.2737 13.7039 18.2737 14.2603 18.82L15.4211 17.6378C14.2202 16.4587 12.2794 16.4587 11.0786 17.6378L12.2394 18.82ZM14.2603 18.82C14.8082 19.358 14.8082 20.2239 14.2603 20.7619L15.4211 21.9441C16.6304 20.7567 16.6304 18.8252 15.4211 17.6378L14.2603 18.82ZM20.6242 15.6956L21.4196 16.4767L22.5804 15.2945L21.785 14.5134L20.6242 15.6956ZM15.4211 18.82L17.8078 16.4767L16.647 15.2944L14.2603 17.6377L15.4211 18.82ZM17.8078 16.4767L18.6032 15.6956L17.4424 14.5134L16.647 15.2945L17.8078 16.4767ZM16.647 16.4767L18.2379 18.0387L19.3987 16.8565L17.8078 15.2945L16.647 16.4767ZM21.785 14.5134C21.4266 14.1616 21.0998 13.8383 20.7993 13.6131C20.4791 13.3732 20.096 13.1716 19.6137 13.1716V14.8284C19.6145 14.8284 19.619 14.8273 19.6395 14.8357C19.6663 14.8466 19.7183 14.8735 19.806 14.9391C19.9969 15.0822 20.2326 15.3112 20.6242 15.6956L21.785 14.5134ZM18.6032 15.6956C18.9948 15.3112 19.2305 15.0822 19.4215 14.9391C19.5091 14.8735 19.5611 14.8466 19.5879 14.8357C19.6084 14.8273 19.6129 14.8284 19.6137 14.8284V13.1716C19.1314 13.1716 18.7483 13.3732 18.4281 13.6131C18.1276 13.8383 17.8008 14.1616 17.4424 14.5134L18.6032 15.6956Z"></path>
+    </svg>
+    <input placeholder="password" title="Inpit title" name="password" type="password" class="input_field" id="password">
+  </div>
+  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+  <button type="submit" class="btn btn-primary">
+    <span>Sign In</span>
+  </button>
+
+
+  <div class="separator">
+    <hr class="line">
+    <span>Or</span>
+    <hr class="line">
+  </div>
+  <div class="mb-3">
+    <label class="d-flex justify-content-center">Or register with:</label>
+    <a th:href="@{'/oauth2/authorization/github'}" class="btn btn-secondary w-100">
+      <i class="fab fa-github"></i> Register with GitHub
+    </a>
+  </div>
+  <div class="registration-button">
+    <a th:href="@{/register}" class="btn btn-primary">
+      <span>Don't have an account? Sign Up</span>
+    </a>
+  </div>
+  <p class="note">Terms of use &amp; Conditions</p>
+</form>
+</div>
+<footer class="footer text-center">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-4">
+          <h4>About Us</h4>
+          <p>"Experience the perfect blend of culinary excellence and seamless hospitality. Reserve your table with us and savor the flavors of delight in a cozy and inviting atmosphere. Your exceptional dining experience awaits!"</p>
+        </div>
+        <div class="col-md-4">
+          <h4>Contact Information</h4>
+          <p>Email: info@TableBooking<br>Phone: +123-456-7890</p>
+        </div>
+        <div class="col-md-4">
+          <h4>Follow Us</h4>
+          <a href="#" class="btn btn-primary btn-social">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" class="btn btn-primary btn-social">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="#" class="btn btn-primary btn-social">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+      <hr>
+      <p>&copy; 2023 Restaurant Table Booking</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Bootstrap JS (Optional, but required if you want to use some JavaScript features from Bootstrap) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"></script>
+<div id="alertContainer" th:if="${error}" class="mt-3"></div>
+</body>
+</html>
